@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Autenticado pelo Fake AAD</title>   
+    <link href="css/dashboard.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h2>Você foi autenticado pelo Fake AAD!</h2>
+
+    <h3>Informações do Token (ID Token decodificado):</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Claim</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="entry : ${idTokenPayload}">
+                <td th:text="${entry.key}"></td>
+                <td th:text="${entry.value}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Access Token:</h3>
+    <pre th:text="${accessToken}"></pre>
+
+    <h3>Refresh Token:</h3>
+    <pre th:text="${refreshToken}"></pre>
+
+    <a href="/" class="button">Voltar para página inicial</a>
+</body>
+</html>

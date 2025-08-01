@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Mock Login</title>
+        <link href="css/index.css" rel="stylesheet" type="text/css"/>
+        
+    </head>
+    <body>
+       <h2>Bem-vindo ao Mock Integration Server</h2>
+    <form th:action="@{static/{tenantId}/oauth2/v2.0/authorize(tenantId=${tenantId})}" method="get">
+        <button type="submit">Login com Microsoft</button>
+    </form>
+    </body>
+</html>
+

@@ -1,0 +1,63 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 31 de jul. de 2025, 21:56:45
+    Author     : erika
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 320px;
+    margin-left: 50px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #0078d7;
+}
+
+p b {
+    color: #333;
+    font-size: 14px;
+    display: block;
+    min-height: 20px;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #0078d7;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
