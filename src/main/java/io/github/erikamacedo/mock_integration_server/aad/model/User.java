@@ -8,10 +8,13 @@ package io.github.erikamacedo.mock_integration_server.aad.model;
  *
  * @author erika
  */
+import io.github.erikamacedo.mock_integration_server.aad.dto.UserRequestDto;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -22,8 +25,15 @@ public class User {
 
     @Column(unique = true)
     private String email;
-
+    
+    @Column(nullable = false)
     private String password;
 
+    
+    
+    public User(UserRequestDto dto) {
+        this.email = dto.email();
+        this.password = dto.senha();
+    }
 
 }

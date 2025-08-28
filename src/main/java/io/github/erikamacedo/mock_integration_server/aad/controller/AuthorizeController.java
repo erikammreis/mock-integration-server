@@ -8,6 +8,7 @@ import io.github.erikamacedo.mock_integration_server.aad.fakes.JwtTokenGenerator
 import io.github.erikamacedo.mock_integration_server.aad.fakes.OAuthClientFake;
 import io.github.erikamacedo.mock_integration_server.aad.model.User;
 import io.github.erikamacedo.mock_integration_server.aad.repository.UserRepository;
+import io.github.erikamacedo.mock_integration_server.aad.service.AuthService;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,11 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class AuthorizeController {
-    
+
     @Autowired
-    private UserRepository userRepository;
-    
-     @GetMapping("/{TENANT_ID}/oauth2/v2.0/authorize")
+    private AuthService authService;
+
+    @GetMapping("/{TENANT_ID}/oauth2/v2.0/authorize")
     public String loginMicrosoftForm(
             @RequestParam String client_id,
             @RequestParam String redirect_uri,
@@ -47,29 +48,25 @@ public class AuthorizeController {
         return "login-microsoft";
     }
 
-    
-
     @PostMapping("/login-microsoft")
     public String loginMicrosoftSubmit(@RequestParam String email,
             @RequestParam String password,
             @RequestParam String client_id,
             @RequestParam String redirect_uri,
             @RequestParam(required = false) String state,
-            Model model) {    
-        Optional<User> userOpt = userRepository.findByEmail(email);
-        if (userOpt.isPresent() && userOpt.get().getPassword().equals(password)) {
-            String code = "fakecode123";
-            String redirectUrl = redirect_uri + "?code=" + code;
+            Model model) {
+        Optional<String> codeOpt = authService.loginMicrosoft(email, password);
+
+        if (codeOpt.isPresent()) {
+            String redirectUrl = redirect_uri + "?code=" + codeOpt.get();
             if (state != null) {
                 redirectUrl += "&state=" + state;
             }
-            JwtTokenGenerator.authCodes.put(code, userOpt.get());
             return "redirect:" + redirectUrl;
         } else {
             model.addAttribute("error", "Usuário ou senha inválidos");
             return "login-microsoft";
         }
     }
-
 
 }

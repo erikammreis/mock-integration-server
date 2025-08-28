@@ -33,7 +33,6 @@ public class TokenController {
             @RequestParam("grant_type") String grantType,
             @RequestParam("client_secret") String clientSecret
     ) {
-        // Simula uma resposta válida de token
         Map<String, Object> response = new HashMap<>();
         response.put("token_type", "Bearer");
         response.put("scope", scope);

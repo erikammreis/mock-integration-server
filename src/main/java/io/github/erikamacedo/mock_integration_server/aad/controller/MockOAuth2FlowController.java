@@ -86,7 +86,6 @@ public class MockOAuth2FlowController {
         return "index";
     }
 
-// Método utilitário para decodificar o payload do JWT (parte do meio)
     private Map<String, Object> decodeJwtPayload(String jwt) throws IOException {
         if (jwt == null) {
             return Map.of();
